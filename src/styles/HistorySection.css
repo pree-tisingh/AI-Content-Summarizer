@@ -1,0 +1,25 @@
+/* HistorySection.css */
+.HistorySection {
+    width: 100%;
+  }
+  
+  .HistorySection h2 {
+    margin-bottom: 10px;
+  }
+  
+  .HistorySection ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .HistorySection ul li {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .HistorySection ul li:last-child {
+    margin-bottom: 0;
+  }
+  

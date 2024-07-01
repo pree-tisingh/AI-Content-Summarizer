@@ -1,38 +1,166 @@
-.App {
-  text-align: center;
+.login-bg {
+  background-image: url('https://static.vecteezy.com/system/resources/previews/017/744/080/non_2x/blue-artificial-intelligence-technology-background-hd-free-photo.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+  overflow: auto;
+  background-size: cover;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dashboard-bg {
+  background-image: url('https://assetsio.gnwcdn.com/Untitled-1_5FlcgQV.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp');
+  background-size: cover;
+  background-position: center;
+  height: 100vh; 
+  overflow: auto;
+  background-repeat: no-repeat;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.App-header h1 {
+  font-size: 36px;
+  color: #3e0e69;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.App-header .welcome-message {
+  font-size: 20px;
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.App-main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 900px;
+  gap: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome{
+  font-size: 18px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+.App-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.ContentInputArea textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.ContentInputArea button,
+.URLInputField button,
+.SummaryOptions button {
+  padding: 12px 24px;
+  background-color: #007bff;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#ctn{
+  padding: 12px 24px;
+  background-color: #fd7e14;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#ctn:hover{
+  background-color: #e66200;
+}
+#length{
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
 }
 
-.App-link {
-  color: #61dafb;
+.ContentInputArea button:hover,
+.URLInputField button:hover,
+.SummaryOptions button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.URLInputField {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.URLInputField input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.SummaryOptions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.SummaryOptions label {
+  font-size: 16px;
+}
+
+.SummaryOptions select {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.App-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+.App-scraped,
+.SummaryDisplay,
+.HistorySection {
+  flex: 1 1 100%; 
+  min-width: 300px; 
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.App-scraped h2,
+.SummaryDisplay h2,
+.HistorySection h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.App-footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 8px 0;
+  background-color: #242222;
+  border-top: 1px solid #ccc;
+}
+
+.App-footer p {
+  font-size: 14px;
+  color: #ffffff;
 }
