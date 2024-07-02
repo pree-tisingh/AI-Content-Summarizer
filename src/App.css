@@ -1,3 +1,7 @@
+.App {
+  display: flex;
+  min-height: 100vh;
+}
 .login-bg {
   background-image: url('https://static.vecteezy.com/system/resources/previews/017/744/080/non_2x/blue-artificial-intelligence-technology-background-hd-free-photo.jpg');
   background-repeat: no-repeat;
@@ -7,22 +11,41 @@
   background-size: cover;
 }
 .dashboard-bg {
-  background-image: url('https://assetsio.gnwcdn.com/Untitled-1_5FlcgQV.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp');
+  background-image: url('https://apps.eui.eu/EUI_API/EVENTSV2/Images/Image?id=11453');
   background-size: cover;
   background-position: center;
   height: 100vh; 
   overflow: auto;
   background-repeat: no-repeat;
 }
-.App-header {
-  text-align: center;
-  margin-bottom: 20px;
+.app-container {
+  display: flex;
+  flex: 1;
 }
+
+.content {
+  display: flex; 
+  flex: 1;
+  flex-direction: column;
+  margin-left: 180px; 
+}
+
+.App-header {
+  padding: 5px;
+  margin-bottom: 20px;
+  text-align: center; 
+}
+
 .App-header h1 {
-  font-size: 36px;
-  color: #3e0e69;
+  font-size: 34px;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 8px;
   margin-bottom: 10px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-block;
 }
 
 .App-header .welcome-message {
@@ -31,23 +54,37 @@
   font-weight: bold;
   margin-bottom: 10px;
 }
+
 .App-main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
   padding: 20px;
-  max-width: 900px;
   gap: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+ 
 }
 
-.welcome{
-  font-size: 18px;
+.welcome {
+  font-size: 8px;
   letter-spacing: 0.6px;
   font-weight: 600;
 }
+
+.feature-section {
+  width: 100%; 
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px; 
+  border-radius: 8px;
+  margin-left: -95px;
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
 .App-inputs {
   display: flex;
   flex-direction: column;
@@ -74,23 +111,6 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-#ctn{
-  padding: 12px 24px;
-  background-color: #fd7e14;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-#ctn:hover{
-  background-color: #e66200;
-}
-#length{
-  font-size: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 600;
 }
 
 .ContentInputArea button:hover,
@@ -138,8 +158,8 @@
 .App-scraped,
 .SummaryDisplay,
 .HistorySection {
-  flex: 1 1 100%; 
-  min-width: 300px; 
+  flex: 1 1 100%;
+  min-width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -152,12 +172,127 @@
   font-size: 20px;
   margin-bottom: 10px;
 }
-.App-footer {
-  text-align: center;
+.scraped-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scraped-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: #007bff;
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.edit-icon:hover {
+  color: #0056b3;
+}
+#ctn1 {
   margin-top: 20px;
-  padding: 8px 0;
-  background-color: #242222;
-  border-top: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #36d1dc, #5b86e5);
+  color: white;
+  border: none;
+  border-radius: 8px; 
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease; 
+}
+
+#ctn1:hover {
+  background: linear-gradient(135deg, #5b86e5, #36d1dc); 
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+#length{
+  font-weight: 700;
+}
+
+.about-section {
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto; 
+
+}
+
+.about-section h2 {
+  font-size: 28px;
+  color: #3e0e69;
+  margin-top: -20px;
+  margin-bottom: 20px;
+ margin-left: -70px;
+  text-align: center; 
+}
+
+.about-section p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center; 
+}
+#info{
+  margin-left: 70px;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about-card h3 {
+  font-size: 22px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.about-card p,
+.about-card ul {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.about-card ul {
+  padding-left: 20px;
+}
+
+.about-card ul li {
+  margin-bottom: 5px;
+}
+
+
+@media (min-width: 768px) {
+  .App-main {
+    margin-left: 200px; 
+    padding: 1rem;
+  }
+}
+
+.App-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
 }
 
 .App-footer p {

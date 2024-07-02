@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/ContentInputArea.css';
 
-const ContentInputArea = ({ content, setContent, handleSummarize }) => {
+const ContentInputArea = ({ content, setContent, handleSummarize,loading }) => {
   const handleChange = (e) => {
     setContent(e.target.value);
   };
@@ -15,7 +15,8 @@ const ContentInputArea = ({ content, setContent, handleSummarize }) => {
         rows={10}
         cols={50}
       />
-      <button onClick={handleSummarize}>Summarize Content</button>
+      <button id="ctn" onClick={handleSummarize}>Summarize Content</button>
+      {loading ? 'Summarizing...' : ''}
     </div>
   );
 };

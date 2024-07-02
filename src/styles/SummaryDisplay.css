@@ -1,4 +1,4 @@
-/* SummaryDisplay.css */
+
 .SummaryDisplay {
     width: 100%;
     margin-bottom: 20px;
@@ -23,4 +23,27 @@
   .SummaryDisplay .summary-content {
     background-color: #f0f0f0;
   }
-  
+
+.ExportOptions {
+  display: flex;
+  justify-content: flex-end;
+  right:10px;
+  gap: 10px;
+  margin-top: 20px; 
+}
+
+.ExportOptions button {
+  padding: 8px 16px; 
+  background-color: rgb(244, 114, 67); 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+  font-size: 14px; 
+  border:1px solid grey;
+}
+
+.ExportOptions button:hover {
+  background-color: rgb(195, 76, 33); 
+}
