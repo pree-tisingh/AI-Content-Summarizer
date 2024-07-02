@@ -23,9 +23,9 @@ app.get('/scrape', async (req, res) => {
 
     let content;
     if (fullPage === 'true') {
-      content = $('body').html(); // Full page HTML
+      content = $('body').html(); 
     } else {
-      content = $('p').text(); // Only paragraph text
+      content = $('p').text(); 
     }
 
     console.log(`Fetched content: ${content.substring(0, 100)}...`);

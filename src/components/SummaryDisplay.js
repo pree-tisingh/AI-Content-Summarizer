@@ -7,7 +7,6 @@ const SummaryDisplay = ({ originalContent, summarizedContent }) => {
   const handleExport = (format) => {
     switch (format) {
       case 'text':
-        // Export as plain text
         const textBlob = new Blob([summarizedContent], { type: 'text/plain' });
         const textUrl = URL.createObjectURL(textBlob);
         const textLink = document.createElement('a');
@@ -18,7 +17,6 @@ const SummaryDisplay = ({ originalContent, summarizedContent }) => {
         document.body.removeChild(textLink);
         break;
       case 'pdf':
-        // Export as PDF
         html2canvas(document.getElementById('summary-content')).then((canvas) => {
           const imgData = canvas.toDataURL('image/png');
           const pdf = new jsPDF();

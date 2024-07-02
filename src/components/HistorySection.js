@@ -1,4 +1,4 @@
-// HistorySection.js
+
 import React from 'react';
 import '../styles/HistorySection.css'
 const HistorySection = ({ history }) => {
