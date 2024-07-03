@@ -3,6 +3,7 @@ import '../styles/Authentication.css';
 
 const Authentication = ({ setUser }) => {
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     setUser(username);
@@ -16,6 +17,12 @@ const Authentication = ({ setUser }) => {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Enter username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
       />
       <button onClick={handleLogin}>Login</button>
     </div>

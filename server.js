@@ -39,14 +39,14 @@ app.get('/scrape', async (req, res) => {
   }
 });
 
-let scrapedContent = ''; // Variable to store scraped content
+let scrapedContent = ''; 
 
 app.put('/api/scraped-content', (req, res) => {
   const { content } = req.body;
   if (!content) {
     return res.status(400).json({ error: 'Content is required' });
   }
-  // Update your scrapedContent variable or perform necessary actions
+
   scrapedContent = content;
   res.json({ message: 'Content updated successfully' });
 });
