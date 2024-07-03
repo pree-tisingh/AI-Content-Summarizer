@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import { FaEdit } from "react-icons/fa";
@@ -20,6 +20,22 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState("home");
   const [isEditing, setIsEditing] = useState(false);
   const [newScrapedContent, setNewScrapedContent] = useState("");
+  const [allScrapedContents, setAllScrapedContents] = useState([]);
+
+  useEffect(() => {
+    const storedContent = localStorage.getItem("scrapedContent");
+    if (storedContent) {
+      setScrapedContent(storedContent);
+      setAllScrapedContents((prevContents) => [...prevContents, storedContent]);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Update local storage whenever scrapedContent changes
+    if (scrapedContent) {
+      localStorage.setItem("scrapedContent", scrapedContent);
+    }
+  }, [scrapedContent]);
 
   const summarizeText = (text, summaryLength) => {
     const length =
@@ -32,7 +48,7 @@ const App = () => {
     const summary = summarizeText(content, summaryLength);
     setOriginalContent(content);
     setSummarizedContent(summary);
-    setHistory([...history, { type: 'summarize', content }]);
+    setHistory([...history, { type: "summarize", content }]);
   };
 
   const handleFetchHTML = async (url) => {
@@ -49,20 +65,26 @@ const App = () => {
   };
 
   const saveScrapedContentToHistory = (content, url) => {
-    setHistory([...history, { type: 'scrape', content, url }]);
+    setHistory([...history, { type: "scrape", content, url }]);
   };
 
   const handleNavigate = (page) => {
     setCurrentPage(page);
   };
+  const handleLogout = () => {
+    setUser("");
+    localStorage.removeItem("scrapedContent"); 
+  };
 
-  const handleEditSave = async () => {
+
+  const handleEditSave = () => {
     try {
-      await axios.put('http://localhost:5000/api/scraped-content', { content: newScrapedContent });
+      localStorage.setItem("scrapedContent", newScrapedContent);
+      console.log("Scraped content updated successfully in local storage");
       setScrapedContent(newScrapedContent);
       setIsEditing(false);
     } catch (error) {
-      console.error('Error updating scraped content:', error);
+      console.error("Error updating scraped content:", error);
     }
   };
 
@@ -71,40 +93,48 @@ const App = () => {
       {!user && <Authentication setUser={setUser} />}
       {user && (
         <>
-          <Sidebar handleNavigate={handleNavigate} />
+          <Sidebar handleNavigate={handleNavigate} handleLogout={handleLogout} />
           <div className="content">
             <header className="App-header">
               <h1>AI-Powered Content Summarizer Dashboard</h1>
               <div className="welcome-message">Welcome, {user}!</div>
+            
             </header>
             <main className="App-main">
-              {currentPage === "scraping" && (
-                <div className="App-results">
-                  {scrapedContent && (
-                    <div className="App-scraped">
-                      <div className="scraped-header">
-                        <h2>Scraped Content Preview</h2>
-                        <FaEdit className="edit-icon" onClick={() => {
-                          setIsEditing(true);
-                          setNewScrapedContent(scrapedContent);
-                        }} />
-                      </div>
-                      {isEditing ? (
-                        <div>
-                          <textarea 
-                            value={newScrapedContent}
-                            onChange={(e) => setNewScrapedContent(e.target.value)}
-                          />
-                          <button onClick={handleEditSave}>Save</button>
-                        </div>
-                      ) : (
-                        <p>{scrapedContent}</p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
               <section className="feature-section">
+                {currentPage === "scraping" && (
+                  <div className="App-results">
+                    <h2>Scrapped Content</h2>
+                    {allScrapedContents.map((scraped, index) => (
+                      <div key={index} className="App-scraped">
+                        <div className="scraped-header">
+                          <h2>Scraped Content Preview</h2>
+                          <FaEdit
+                            className="edit-icon"
+                            onClick={() => {
+                              setIsEditing(true);
+                              setNewScrapedContent(scraped);
+                            }}
+                          />
+                        </div>
+                        {isEditing ? (
+                          <div>
+                            <textarea
+                              value={newScrapedContent}
+                              onChange={(e) =>
+                                setNewScrapedContent(e.target.value)
+                              }
+                            />
+                            <button onClick={handleEditSave}>Save</button>
+                          </div>
+                        ) : (
+                          <p>{scraped}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {currentPage === "home" && (
                   <div className="App-inputs">
                     <h2>Features Section</h2>
@@ -121,7 +151,7 @@ const App = () => {
                     </div>
                     <div className="SummaryOptions">
                       <label htmlFor="summary-length" id="length">
-                        Summary Length:{" "}
+                        Summary Length:
                       </label>
                       <select
                         id="summary-length"
@@ -141,16 +171,21 @@ const App = () => {
                         <div className="App-scraped">
                           <div className="scraped-header">
                             <h2>Scraped Content Preview</h2>
-                            <FaEdit className="edit-icon" onClick={() => {
-                              setIsEditing(true);
-                              setNewScrapedContent(scrapedContent);
-                            }} />
+                            <FaEdit
+                              className="edit-icon"
+                              onClick={() => {
+                                setIsEditing(true);
+                                setNewScrapedContent(scrapedContent);
+                              }}
+                            />
                           </div>
                           {isEditing ? (
                             <div>
-                              <textarea 
+                              <textarea
                                 value={newScrapedContent}
-                                onChange={(e) => setNewScrapedContent(e.target.value)}
+                                onChange={(e) =>
+                                  setNewScrapedContent(e.target.value)
+                                }
                               />
                               <button onClick={handleEditSave}>Save</button>
                             </div>
@@ -176,29 +211,33 @@ const App = () => {
                 {currentPage === "about" && (
                   <div className="App-results about-section">
                     <h2>About</h2>
-                    <p id="info">This is the AI-Powered Content Summarizer Dashboard.</p>
+                    <p id="info">
+                      This is the AI-Powered Content Summarizer Dashboard.
+                    </p>
                     <div className="about-content">
                       <div className="about-card">
                         <h3>Our Mission</h3>
                         <p>
-                          Our mission is to provide seamless and efficient
-                          content summarization using advanced AI algorithms.
+                          To provide a tool that helps users quickly and
+                          efficiently summarize content from various sources,
+                          saving time and enhancing productivity.
                         </p>
                       </div>
                       <div className="about-card">
-                        <h3>Features</h3>
-                        <ul>
-                          <li>Content Summarization</li>
-                          <li>URL Fetching</li>
-                          <li>User Authentication</li>
-                          <li>History Display</li>
-                        </ul>
+                        <h3>How It Works</h3>
+                        <p>
+                          Users can input text directly or provide a URL for
+                          scraping. The AI will summarize the content based on
+                          the specified length, providing a concise overview of
+                          the main points.
+                        </p>
                       </div>
                       <div className="about-card">
-                        <h3>Contact Us</h3>
+                        <h3>Team</h3>
                         <p>
-                          If you have any questions or feedback, feel free to
-                          contact us at support@example.com.
+                          Our team is dedicated to developing cutting-edge tools
+                          that leverage AI technology to make information more
+                          accessible and manageable.
                         </p>
                       </div>
                     </div>

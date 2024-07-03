@@ -4,11 +4,14 @@ const cors = require('cors');
 const cheerio = require('cheerio');
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 app.use(express.json());
 app.use(cors());
+
 app.get('/', (req, res) => {
   res.send('Server is running');
 });
+
 app.get('/scrape', async (req, res) => {
   const { url, fullPage } = req.query;
   if (!url) {
@@ -23,9 +26,9 @@ app.get('/scrape', async (req, res) => {
 
     let content;
     if (fullPage === 'true') {
-      content = $('body').html(); 
+      content = $('body').html();
     } else {
-      content = $('p').text(); 
+      content = $('p').text();
     }
 
     console.log(`Fetched content: ${content.substring(0, 100)}...`);
@@ -36,11 +39,14 @@ app.get('/scrape', async (req, res) => {
   }
 });
 
+let scrapedContent = ''; // Variable to store scraped content
+
 app.put('/api/scraped-content', (req, res) => {
   const { content } = req.body;
   if (!content) {
     return res.status(400).json({ error: 'Content is required' });
   }
+  // Update your scrapedContent variable or perform necessary actions
   scrapedContent = content;
   res.json({ message: 'Content updated successfully' });
 });
